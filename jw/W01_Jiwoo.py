@@ -480,17 +480,242 @@
 
 
 
-#1074
-#다시 보기
-N, r, c = map(int, input().split())
+# #1074
+# #다시 보기
+# N, r, c = map(int, input().split())
 
-def sol(N, r, c):
+# def sol(N, r, c):
 
-	if N == 0:
-		return 0
+# 	if N == 0:
+# 		return 0
         
-	return 2*(r%2)+(c%2) + 4*sol(N-1, int(r/2), int(c/2))
+# 	return 2*(r%2)+(c%2) + 4*sol(N-1, int(r/2), int(c/2))
 
-print(sol(N, r, c))
+# print(sol(N, r, c))
     
 
+# #2750
+# tmp = []
+# for _ in range(int(input())):
+#     tmp.append(int(input()))
+
+# for i in sorted(tmp):
+#     print(i)
+
+
+# #2751
+# import sys
+# input = sys.stdin.readline
+# tmp = []
+# for _ in range(int(input())):
+#     tmp.append(int(input()))
+
+# for i in sorted(tmp):
+#     print(i)
+
+
+#10989
+#메모리 초과 풀이
+# import sys, heapq
+# input = sys.stdin.readline
+# print = sys.stdout.write
+# tmp = []
+# N = int(input())
+# for _ in range(N):
+#     heapq.heappush(tmp, int(input()))
+    
+# for _ in range(N):
+#     print(str(heapq.heappop(tmp)) + '\n')
+
+
+# # 이 문제는 for문 사용하여 푸는것과 어떻게 메모리 차이가 나는지 추후 보충 공부하기
+# import sys
+# n = int(sys.stdin.readline())
+# countList = [0]*10001
+
+# for i in range(n):
+#     countList[int(sys.stdin.readline())] += 1
+
+# for i in range(10001):
+#     if countList[i] != 0:
+#         for j in range(countList[i]):
+#             print(i)
+
+
+# #1181
+# N = int(input())
+# tmp = set([])
+# for _ in range(N):
+#     a = input()
+#     tmp.add((len(a), a))
+
+# for i in sorted(tmp):
+#     print(i[1])
+
+
+# #2309
+# from itertools import combinations
+# tmp = [int(input()) for _ in range(9)]
+
+# for c in combinations(tmp, 7):
+#     if sum(c) == 100:
+#         for i in sorted(c):
+#             print(i)
+#         break
+
+
+# #2798
+# from itertools import combinations
+# N, M =map(int, input().split())
+# cards = list(map(int, input().split()))
+# tmp = []
+# for sets in combinations(cards, 3):
+#     if M >= sum(sets):
+#         # print(sets)
+#         tmp.append([M-sum(sets), sum(sets)])
+
+# tmp.sort()
+# print(tmp[0][1])
+
+
+
+# #10819
+# from itertools import permutations
+# N = int(input())
+# l = list((map(int, input().split())))
+# tmp = []
+# sums = []
+
+# for sets in permutations(l, N):
+#     for i in range(0, N-1):
+#         tmp.append(abs(sets[i]-sets[i+1]))
+#     sums.append(sum(tmp))
+#     tmp.clear()
+
+# print(max(sums))
+
+# #더 간단히 하면...
+# from itertools import permutations
+
+# N = int(input())
+# A = list(map(int, input().split()))
+# ans = -1
+# for arr in set(permutations(A, N)):
+#     ans = max(ans, sum(abs(arr[i-1] - arr[i]) for i in range(1, N)))
+
+# print(ans)
+
+
+# #10971
+# #다시 보기
+# import sys
+
+# N = int(input()) #도시의 개수
+# travel_cost = [list(map(int, input().split())) for _ in range(N)]
+# min_value = sys.maxsize #출력할 최소값 정의
+
+
+# def dfs_backtracking(start, next, value, visited): #시작도시번호,다음도시번호,비용,방문 도시
+#     global min_value
+
+#     if len(visited) == N: #만약 방문한 도시가 입력받은 도시의 개수라면
+#         if travel_cost[next][start] != 0: #마지막 도시에서 출발 도시로 가는 비용이 0이 아니라면(즉,갈수 있다면)
+#             min_value = min(min_value, value + travel_cost[next][start]) #더한 값을 저장되어있는 최소값과 비교해서 대입
+#         return
+
+#     for i in range(N): #도시의 개수 만큼 반복문을 돈다.
+#         #만약 현재 도시에서 갈 수 있는 도시의 비용이 0이 아니고 이미 방문한 도시가 아니며 그 비용값이 저장되어있는 최소값보다 작다면
+#         if travel_cost[next][i] != 0 and i not in visited and value < min_value: 
+#             visited.append(i) #그 도시를 방문목록에 추가
+#             dfs_backtracking(start, i, value + travel_cost[next][i], visited) #그 도시를 방문한다.
+#             visited.pop() #방문을 완료했다면 방문목록 해제
+
+
+# #도시마다(0~3) 출발점을 지정
+# for i in range(N):
+#     dfs_backtracking(i, i, 0, [i])
+
+# print(min_value)
+
+
+
+# #14888
+# # # 순열 이용 - 시간초과/틀림
+# # from itertools import permutations
+# # N = int(input())
+# # A = list(map(int, input().split()))
+# # O = list(map(int, input().split()))
+
+# # tmp = []
+# # for i in range(4):
+# #     if O[i] != 0:
+# #         if i == 0:
+# #             for _ in range(O[i]):
+# #                 tmp.append("+") 
+# #         elif i == 1:
+# #             for _ in range(O[i]):
+# #                 tmp.append("-")
+# #         elif i == 2:
+# #             for _ in range(O[i]):
+# #                 tmp.append("*")
+# #         elif i == 3:
+# #             for _ in range(O[i]):
+# #                 tmp.append("//")
+
+# # # print(tmp)
+# # find_max = 0
+# # find_min = 123456789
+# # for arr in permutations(tmp, len(tmp)):
+# #     # print(arr)
+# #     res = A[0]
+# #     for j in range(0, len(A)-1):
+# #         if arr[j] == "+":
+# #             res += A[j+1]
+# #         elif arr[j] == "-":
+# #             res -= A[j+1]
+# #         elif arr[j] == "*":
+# #             res *= A[j+1]
+# #         elif arr[j] == "//":
+# #             res = int(res / A[j+1])
+# #         # print(res)
+# #     find_max = max(res, find_max)
+# #     find_min = min(res, find_min)
+
+# # print(find_max)
+# # print(find_min)
+
+
+# # 백트래킹 (Python3 통과, PyPy3도 통과)
+# import sys
+
+# input = sys.stdin.readline
+# N = int(input())
+# num = list(map(int, input().split()))
+# op = list(map(int, input().split()))  # +, -, *, //
+
+# maximum = -1e9
+# minimum = 1e9
+
+
+# def dfs(depth, total, plus, minus, multiply, divide):
+#     global maximum, minimum
+#     if depth == N:
+#         maximum = max(total, maximum)
+#         minimum = min(total, minimum)
+#         return
+
+#     if plus:
+#         dfs(depth + 1, total + num[depth], plus - 1, minus, multiply, divide)
+#     if minus:
+#         dfs(depth + 1, total - num[depth], plus, minus - 1, multiply, divide)
+#     if multiply:
+#         dfs(depth + 1, total * num[depth], plus, minus, multiply - 1, divide)
+#     if divide:
+#         dfs(depth + 1, int(total / num[depth]), plus, minus, multiply, divide - 1)
+
+
+# dfs(1, num[0], op[0], op[1], op[2], op[3])
+# print(maximum)
+# print(minimum)
+    
+    
