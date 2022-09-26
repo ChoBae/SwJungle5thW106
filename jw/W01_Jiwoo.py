@@ -130,7 +130,7 @@
 
 
 # #2577
-#딕셔너리 이용 풀이
+# # 딕셔너리 이용 풀이
 # A = int(input())
 # B = int(input())
 # C = int(input())
@@ -178,19 +178,7 @@
 # print(ord(asc))
 
 
-#2675
-# 배열 쓰는 방법
-# T = int(input())
-# for _ in range(T):
-#     R, S = map(str, input().split())
-#     res = []
-#     for s in S:
-#         print(s*int(R), end='')
-#         for _ in range(int(R)):
-#             res.append(s)
-#     print(''.join(res))
-
-# # 배열 따로 안쓰고 바로 출력하는 방법
+# # 2675
 # n = int(input())
 
 # for _ in range(n):
@@ -228,12 +216,11 @@
 #         break
 #     tmp = tmp + B
 
-# # #2번 풀이
-# # #
-# # import math
-# # A, B, V = map(int, input().split())
-# # day = (V - B) / (A - B)
-# # print(math.ceil(day))
+# #2번 풀이
+# import math
+# A, B, V = map(int, input().split())
+# day = (V - B) / (A - B)
+# print(math.ceil(day))
 
 
 # #1978
@@ -255,22 +242,22 @@
 #         res += 1
 # print(res)
 
-# # #2번 방법
-# # n = int(input())
-# # ary = list(map(int, input().split()))
-# # count = 0
+# #2번 방법
+# n = int(input())
+# ary = list(map(int, input().split()))
+# count = 0
 
-# # for i in ary:
-# #     for j in range(2, i+1):
-# #         if n != 1:
-# #             if i != j and i % j == 0:
-# #                 break
+# for i in ary:
+#     for j in range(2, i+1):
+#         if n != 1:
+#             if i != j and i % j == 0:
+#                 break
 
-# #             if j == i:
-# #                 count += 1
-# #                 break
+#             if j == i:
+#                 count += 1
+#                 break
 
-# # print(count)
+# print(count)
 
 
 # #9020
@@ -306,25 +293,22 @@
 
 
 # #정답 코드
-# def is_prime(n):
-#     if n == 1:
-#         return False
-#     for j in range(2, int(n**0.5) + 1):
-#         if n % j == 0:
-#             return False
-#     return True
+# sosu = [0 for i in range(10001)]
+# sosu[1] = 1
 
+# for i in range(2, 98):
+#     for j in range(i * 2, 10001, i):
+#         sosu[j] = 1
 
-# for _ in range(int(input())):
-#     num = int(input())
+# t = int(input())
 
-#     a, b = num//2, num//2
-#     while a > 0:
-#         if is_prime(a) and is_prime(b):
-#             print(a, b)
-#         else:
-#             a -= 1
-#             b += 1
+# for i in range(t):
+#     a = int(input())
+#     b = a // 2
+#     for j in range(b, 1, -1):
+#         if sosu[a - j] == 0 and sosu[j] == 0:
+#             print(j, a - j)
+#             break
     
 
 # #1065
@@ -344,7 +328,6 @@
 
 
 # #2628
-# from itertools import combinations
 
 # x, y = map(int, input().split())
 # T = int(input())
@@ -360,18 +343,19 @@
 # x_ary.sort()
 # y_ary.sort()
 
-# subtracted_r = []  #[4, 6]
-# subtracted_c = []  #[2, 1, 5]
+# subx_max = 0
+# suby_max = 0
 
-# for i in range(len(x_ary)-1):    # 0 1
-#     subtracted_r.append(x_ary[i + 1] - x_ary[i])
-# for i in range(len(y_ary) -1): # 0 1 2 
-#     subtracted_c.append(y_ary[i+1]- y_ary[i])
+# for i in range(len(x_ary)-1):
+#     subx_max = max(subx_max, x_ary[i+1] - x_ary[i])
+# for i in range(len(y_ary) -1):
+#     suby_max = max(suby_max, y_ary[i+1] - y_ary[i])
 
-# print(max(subtracted_r) * max(subtracted_c))
+# print(subx_max * suby_max)
 
 
 # #10872
+# # for 문 사용 풀이
 # N = int(input())
 # res = 1
 # for i in range(1, N+1):
@@ -379,13 +363,25 @@
 
 # print(res)
 
+# #재귀함수 풀이
+# def factorial(num):
+#     if num == 0:
+#         return 1
+#     return num * factorial(num-1)
+
+# N = int(input())
+# print(factorial(N))
+
+
 
 # #17478
 # def recur(count):  
 #     print("____" * (num-count) +  "\"재귀함수가 뭔가요?\"")
+
 #     if count == 0:
 #         print("____" * (num-count) + "\"재귀함수는 자기 자신을 호출하는 함수라네\"")
 #         return
+
 #     print("____" * (num-count) +  "\"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.")
 #     print("____" * (num-count) +  "마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.")
 #     print("____" * (num-count) +  "그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어.\"")
@@ -401,8 +397,9 @@
 # print("라고 답변하였지.")
 
 
-# # 5568
-# from itertools import combinations, permutations
+# 5568
+# # 순열 이용하는 방법
+# from itertools import permutations
 # n = int(input())
 # k = int(input())
 # cards = []
@@ -422,20 +419,64 @@
 # print(len(sets))
 
 
+# #재귀함수 이용하는 방법
+# n = int(input())
+# k = int(input())
+# cards = [int(input()) for _ in range(n)]
+# sets = set([])
+# used = [0]*len(cards)
+
+# def perm(arr, k):
+#     if k==len(cards):
+#         sets.add(''.join(map(str, arr)))
+#         # 
+#         print(sets)
+#         # print(len(sets))
+#         return 
+    
+#     for i in range(len(cards)):
+#         if not used[i]:
+#             used[i] = 1
+#             arr.append(cards[i])
+#             perm(arr, k+1)
+#             arr.pop()
+#             used[i] = 0
+
+# perm([], 0)
+
+
+
+
+
+
 # #1914
 # # 다시
 # N = int(input())
 
-# def HANOI(x, y, z, cnt):
+# #start_peg에서 end_peg으로 n개 원판을 옮기려면
+# def HANOI(start_peg, other_peg, end_peg, cnt):
 #     if cnt == 0:
-#         return
+#         return 
 
-#     HANOI(x, z, y, cnt - 1)
-#     print(x,z)
-#     HANOI(y, x, z, cnt - 1)
+#     #H(n-1)
+#     #start_peg에서 other_peg으로 n-1개 원판을 옮김.
+#     HANOI(start_peg, end_peg, other_peg, cnt - 1)
 
-# print((1 << N) - 1)
+#     #H(n)
+#     #H(1) = 1
+#     #start_peg에서 end_peg으로 1개 원판을 옮김.
+#     print(start_peg, end_peg)
+
+#     #H(n-1)
+#     #other_peg에서 end_peg으로 n-1개 원판을 옮김.
+#     HANOI(other_peg, start_peg, end_peg, cnt - 1)
+
+# # 횟수 출력
+# print(2**N-1)
+
 # if N <= 20:
+#     #H(n)
+#     #start_peg에서 end_peg으로 n개 원판을 옮기기.
 #     HANOI(1, 2, 3, N)
 
 
@@ -472,8 +513,8 @@
 #     j = N//2
 #     col[j] = d1[-j] = d2[j] = True
 #     backtracking(1)
-
 #     print(ans)
+
 # else:
 #     backtracking(0)
 #     print(ans*2)
@@ -514,8 +555,8 @@
 #     print(i)
 
 
-#10989
-#메모리 초과 풀이
+# # 10989
+# # 메모리 초과 풀이
 # import sys, heapq
 # input = sys.stdin.readline
 # print = sys.stdout.write
