@@ -419,32 +419,48 @@
 # print(len(sets))
 
 
-# #재귀함수 이용하는 방법
+# #재귀함수 이용하여 직접 순열 구현하는 방법
 # n = int(input())
 # k = int(input())
 # cards = [int(input()) for _ in range(n)]
 # sets = set([])
 # used = [0]*len(cards)
 
-# def perm(arr, k):
-#     if k==len(cards):
+# def perm(arr, a):
+#     global k
+#     if a==k:
 #         sets.add(''.join(map(str, arr)))
-#         # 
-#         print(sets)
-#         # print(len(sets))
 #         return 
     
 #     for i in range(len(cards)):
 #         if not used[i]:
 #             used[i] = 1
 #             arr.append(cards[i])
-#             perm(arr, k+1)
-#             arr.pop()
+#             perm(arr, a+1)
+#             print(arr.pop())
 #             used[i] = 0
 
 # perm([], 0)
+# print(len(sets))
 
 
+# #재귀함수 이용하여 직접 조합 구현하는 방법
+# nums = [1, 2, 3, 4, 5]
+# answer_list = []
+
+# def nCr(n, ans, r):
+#     if n == len(nums):
+#         if len(ans) == r:
+#             temp = [i for i in ans]
+#             answer_list.append(temp)
+#         return
+#     ans.append(nums[n])
+#     nCr(n + 1, ans, r)
+#     print(ans.pop())
+#     nCr(n + 1, ans, r)
+
+# nCr(0, [], 3)
+# print(answer_list)
 
 
 
@@ -647,8 +663,9 @@
 # print(ans)
 
 
-# #10971
+#10971
 # #다시 보기
+# #백트래킹 사용 코드
 # import sys
 
 # N = int(input()) #도시의 개수
@@ -679,53 +696,37 @@
 # print(min_value)
 
 
+# #dfs이용 코드
+# #pypy로 풀림
+# import sys
+# input = sys.stdin.readline
+# n = int(input())
+# matrix = []
+# for _ in range(n):
+#     matrix.append([int(x) for x in input().split()])
+# # matrix = [list(map(int, input().split())) for _ in range(n)]
+# minCost = float('inf')
+# visited = [False for _ in range(n)]
+
+# def dfs(start, cur, cost):
+#     global matrix, visited, minCost
+
+#     if start == cur and visited.count(False) == 0:
+#         minCost = min(minCost, cost)
+
+#     for i in range(n):
+#         if matrix[cur][i] != 0 and visited[i] == 0:
+#             visited[i] = True
+#             dfs(start, i ,cost+matrix[cur][i])
+#             visited[i] = False
+
+
+# dfs(0,0,0)
+# print(minCost)
+
+
 
 # #14888
-# # # 순열 이용 - 시간초과/틀림
-# # from itertools import permutations
-# # N = int(input())
-# # A = list(map(int, input().split()))
-# # O = list(map(int, input().split()))
-
-# # tmp = []
-# # for i in range(4):
-# #     if O[i] != 0:
-# #         if i == 0:
-# #             for _ in range(O[i]):
-# #                 tmp.append("+") 
-# #         elif i == 1:
-# #             for _ in range(O[i]):
-# #                 tmp.append("-")
-# #         elif i == 2:
-# #             for _ in range(O[i]):
-# #                 tmp.append("*")
-# #         elif i == 3:
-# #             for _ in range(O[i]):
-# #                 tmp.append("//")
-
-# # # print(tmp)
-# # find_max = 0
-# # find_min = 123456789
-# # for arr in permutations(tmp, len(tmp)):
-# #     # print(arr)
-# #     res = A[0]
-# #     for j in range(0, len(A)-1):
-# #         if arr[j] == "+":
-# #             res += A[j+1]
-# #         elif arr[j] == "-":
-# #             res -= A[j+1]
-# #         elif arr[j] == "*":
-# #             res *= A[j+1]
-# #         elif arr[j] == "//":
-# #             res = int(res / A[j+1])
-# #         # print(res)
-# #     find_max = max(res, find_max)
-# #     find_min = min(res, find_min)
-
-# # print(find_max)
-# # print(find_min)
-
-
 # # 백트래킹 (Python3 통과, PyPy3도 통과)
 # import sys
 
