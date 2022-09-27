@@ -397,7 +397,7 @@
 # print("라고 답변하였지.")
 
 
-# 5568
+# # 5568
 # # 순열 이용하는 방법
 # from itertools import permutations
 # n = int(input())
@@ -537,8 +537,8 @@
 
 
 
-# #1074
-# #다시 보기
+#1074
+#다시 보기
 # N, r, c = map(int, input().split())
 
 # def sol(N, r, c):
@@ -549,7 +549,41 @@
 # 	return 2*(r%2)+(c%2) + 4*sol(N-1, int(r/2), int(c/2))
 
 # print(sol(N, r, c))
-    
+
+
+# #사분면 나눠서 하는 풀이
+# import sys
+
+# n, r, c = map(int, sys.stdin.readline().split())
+
+# visit = 0
+# while n != 0:
+#     n -= 1
+#     size = 2 ** n
+
+#     # 1사분면
+#     if r < size and c < size:
+#         visit += 0
+
+#     # 2사분면
+#     elif r < size and c >= size:
+#         visit += size * size
+#         c -= size
+
+#     # 3사분면
+#     elif r >= size and c < size:
+#         visit += size * size * 2
+#         r -= size
+
+#     # 4사분면
+#     else:
+#         visit += size * size * 3
+#         r -= size
+#         c -= size
+
+# print(visit)
+
+
 
 # #2750
 # tmp = []
@@ -759,5 +793,169 @@
 # dfs(1, num[0], op[0], op[1], op[2], op[3])
 # print(maximum)
 # print(minimum)
+
+
+
+
+#개인 Practice
+
+# #11729
+# N = int(input())
+# count = []
+
+# def hanoi(start_peg, other_peg, end_peg, N):
+
+#     global count
+
+#     if N == 0:
+#         return
+    
+#     hanoi(start_peg, end_peg, other_peg, N-1)
+#     count.append((start_peg, end_peg))
+#     hanoi(other_peg, start_peg, end_peg, N-1)
+
+
+# hanoi(1,2,3,N)
+# print(len(count))
+# for arr in count:
+#     print(' '.join(map(str, arr)))
+
+
+
+# #2447
+# #이전것이 주변을 둘러쌈
+# n = int(input())
+# star = ["***", "* *", "***"]
+# cnt = 0
+
+# def getStars(star):
+#     mat = []
+#     for i in range(3 * len(star)):
+#         if i // len(star) == 1:
+#             mat.append(star[i % len(star)] + " " * len(star) + star[i % len(star)])
+#         else:
+#             mat.append(star[i % len(star)] * 3)
+#     return mat
+
+
+# while n > 3:
+#     n /= 3
+#     cnt += 1
+
+# for i in range(cnt):
+#     star = getStars(star)
+
+# for i in star:
+#     print(i)
+
+
+#1991
+N = int(input())
+left = []
+right = []
+nodes = dict()
+visited = set([])
+
+for _ in range(N):
+    a, b, c = map(str, input().split())
+    nodes[a] = (b, c)
+
+
+def pre(left, right):
+    global visited
+
+    #제일 왼쪽으로 끝까지 간다.
+    if left != '.':
+        print(left, end='')
+        visited.add(left)
+        pre(nodes[left][0], nodes[left][1])
     
     
+    if len(visited) == N:
+        return
+
+    #오른쪽 노드가 있으면 본다.
+    #본 다음에 올라간다.
+    #오른쪽 노드가 있으면 본다.
+    #본 다음에 올라간다.
+    #...
+    if right != '.':
+        print(right, end='')
+        pre(nodes[right][0], nodes[right][1])
+    else:
+        return
+
+
+def ino(left, cur, right):
+    global visited
+
+    if len(visited) == N:
+        return
+
+    #끝까지 내려갔음
+    if left == '.':
+    
+        #말단이면 리턴
+        if right == '.':
+            print(cur, end='')
+            visited.add(cur)
+            return   
+
+    else:
+        # 아직 다 안내려갔으면 더 내려가기
+        ino(nodes[left][0], left, nodes[left][1])
+    
+    #right가 있으면
+    if right != '.':
+        print(cur, end='')
+        visited.add(cur)
+        ino(nodes[right][0], right, nodes[right][1])
+    else:
+        #right 없으면
+        print(cur, end='')
+        visited.add(cur)
+        return
+
+
+def post(left, cur, right):
+    global visited
+
+    if len(visited) == N:
+        return
+
+    #내려갔음
+    if left == '.':
+        #말단이면 리턴
+        if right == '.':
+            print(cur, end='')
+            visited.add(cur)
+            return
+    else:
+        # 아직 다 안내려갔으면 더 내려가기
+        post(nodes[left][0], left, nodes[left][1])
+    
+    #right가 없음
+    if right == '.':
+        print(cur, end='')
+        visited.add(cur)
+        #말단이면
+        if left == '.':
+            return
+
+    else:
+        #right 있으면
+        post(nodes[right][0], right, nodes[right][1])
+        print(cur, end='')
+        visited.add(cur)
+
+
+
+    
+print('A', end='')
+pre(nodes['A'][0], nodes['A'][1])
+visited.clear()
+print()
+ino(nodes['A'][0], 'A', nodes['A'][1])
+visited.clear()
+print()
+post(nodes['A'][0], 'A', nodes['A'][1])
