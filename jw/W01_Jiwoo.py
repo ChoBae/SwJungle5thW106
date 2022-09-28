@@ -130,7 +130,7 @@
 
 
 # #2577
-#딕셔너리 이용 풀이
+# # 딕셔너리 이용 풀이
 # A = int(input())
 # B = int(input())
 # C = int(input())
@@ -178,19 +178,7 @@
 # print(ord(asc))
 
 
-#2675
-# 배열 쓰는 방법
-# T = int(input())
-# for _ in range(T):
-#     R, S = map(str, input().split())
-#     res = []
-#     for s in S:
-#         print(s*int(R), end='')
-#         for _ in range(int(R)):
-#             res.append(s)
-#     print(''.join(res))
-
-# # 배열 따로 안쓰고 바로 출력하는 방법
+# # 2675
 # n = int(input())
 
 # for _ in range(n):
@@ -228,12 +216,11 @@
 #         break
 #     tmp = tmp + B
 
-# # #2번 풀이
-# # #
-# # import math
-# # A, B, V = map(int, input().split())
-# # day = (V - B) / (A - B)
-# # print(math.ceil(day))
+# #2번 풀이
+# import math
+# A, B, V = map(int, input().split())
+# day = (V - B) / (A - B)
+# print(math.ceil(day))
 
 
 # #1978
@@ -255,22 +242,22 @@
 #         res += 1
 # print(res)
 
-# # #2번 방법
-# # n = int(input())
-# # ary = list(map(int, input().split()))
-# # count = 0
+# #2번 방법
+# n = int(input())
+# ary = list(map(int, input().split()))
+# count = 0
 
-# # for i in ary:
-# #     for j in range(2, i+1):
-# #         if n != 1:
-# #             if i != j and i % j == 0:
-# #                 break
+# for i in ary:
+#     for j in range(2, i+1):
+#         if n != 1:
+#             if i != j and i % j == 0:
+#                 break
 
-# #             if j == i:
-# #                 count += 1
-# #                 break
+#             if j == i:
+#                 count += 1
+#                 break
 
-# # print(count)
+# print(count)
 
 
 # #9020
@@ -306,25 +293,22 @@
 
 
 # #정답 코드
-# def is_prime(n):
-#     if n == 1:
-#         return False
-#     for j in range(2, int(n**0.5) + 1):
-#         if n % j == 0:
-#             return False
-#     return True
+# sosu = [0 for i in range(10001)]
+# sosu[1] = 1
 
+# for i in range(2, 98):
+#     for j in range(i * 2, 10001, i):
+#         sosu[j] = 1
 
-# for _ in range(int(input())):
-#     num = int(input())
+# t = int(input())
 
-#     a, b = num//2, num//2
-#     while a > 0:
-#         if is_prime(a) and is_prime(b):
-#             print(a, b)
-#         else:
-#             a -= 1
-#             b += 1
+# for i in range(t):
+#     a = int(input())
+#     b = a // 2
+#     for j in range(b, 1, -1):
+#         if sosu[a - j] == 0 and sosu[j] == 0:
+#             print(j, a - j)
+#             break
     
 
 # #1065
@@ -344,7 +328,6 @@
 
 
 # #2628
-# from itertools import combinations
 
 # x, y = map(int, input().split())
 # T = int(input())
@@ -360,18 +343,19 @@
 # x_ary.sort()
 # y_ary.sort()
 
-# subtracted_r = []  #[4, 6]
-# subtracted_c = []  #[2, 1, 5]
+# subx_max = 0
+# suby_max = 0
 
-# for i in range(len(x_ary)-1):    # 0 1
-#     subtracted_r.append(x_ary[i + 1] - x_ary[i])
-# for i in range(len(y_ary) -1): # 0 1 2 
-#     subtracted_c.append(y_ary[i+1]- y_ary[i])
+# for i in range(len(x_ary)-1):
+#     subx_max = max(subx_max, x_ary[i+1] - x_ary[i])
+# for i in range(len(y_ary) -1):
+#     suby_max = max(suby_max, y_ary[i+1] - y_ary[i])
 
-# print(max(subtracted_r) * max(subtracted_c))
+# print(subx_max * suby_max)
 
 
 # #10872
+# # for 문 사용 풀이
 # N = int(input())
 # res = 1
 # for i in range(1, N+1):
@@ -379,13 +363,25 @@
 
 # print(res)
 
+# #재귀함수 풀이
+# def factorial(num):
+#     if num == 0:
+#         return 1
+#     return num * factorial(num-1)
+
+# N = int(input())
+# print(factorial(N))
+
+
 
 # #17478
 # def recur(count):  
 #     print("____" * (num-count) +  "\"재귀함수가 뭔가요?\"")
+
 #     if count == 0:
 #         print("____" * (num-count) + "\"재귀함수는 자기 자신을 호출하는 함수라네\"")
 #         return
+
 #     print("____" * (num-count) +  "\"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.")
 #     print("____" * (num-count) +  "마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.")
 #     print("____" * (num-count) +  "그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어.\"")
@@ -402,7 +398,8 @@
 
 
 # # 5568
-# from itertools import combinations, permutations
+# # 순열 이용하는 방법
+# from itertools import permutations
 # n = int(input())
 # k = int(input())
 # cards = []
@@ -422,20 +419,80 @@
 # print(len(sets))
 
 
+# #재귀함수 이용하여 직접 순열 구현하는 방법
+# n = int(input())
+# k = int(input())
+# cards = [int(input()) for _ in range(n)]
+# sets = set([])
+# used = [0]*len(cards)
+
+# def perm(arr, a):
+#     global k
+#     if a==k:
+#         sets.add(''.join(map(str, arr)))
+#         return 
+    
+#     for i in range(len(cards)):
+#         if not used[i]:
+#             used[i] = 1
+#             arr.append(cards[i])
+#             perm(arr, a+1)
+#             print(arr.pop())
+#             used[i] = 0
+
+# perm([], 0)
+# print(len(sets))
+
+
+# #재귀함수 이용하여 직접 조합 구현하는 방법
+# nums = [1, 2, 3, 4, 5]
+# answer_list = []
+
+# def nCr(n, ans, r):
+#     if n == len(nums):
+#         if len(ans) == r:
+#             temp = [i for i in ans]
+#             answer_list.append(temp)
+#         return
+#     ans.append(nums[n])
+#     nCr(n + 1, ans, r)
+#     print(ans.pop())
+#     nCr(n + 1, ans, r)
+
+# nCr(0, [], 3)
+# print(answer_list)
+
+
+
+
 # #1914
 # # 다시
 # N = int(input())
 
-# def HANOI(x, y, z, cnt):
+# #start_peg에서 end_peg으로 n개 원판을 옮기려면
+# def HANOI(start_peg, other_peg, end_peg, cnt):
 #     if cnt == 0:
-#         return
+#         return 
 
-#     HANOI(x, z, y, cnt - 1)
-#     print(x,z)
-#     HANOI(y, x, z, cnt - 1)
+#     #H(n-1)
+#     #start_peg에서 other_peg으로 n-1개 원판을 옮김.
+#     HANOI(start_peg, end_peg, other_peg, cnt - 1)
 
-# print((1 << N) - 1)
+#     #H(n)
+#     #H(1) = 1
+#     #start_peg에서 end_peg으로 1개 원판을 옮김.
+#     print(start_peg, end_peg)
+
+#     #H(n-1)
+#     #other_peg에서 end_peg으로 n-1개 원판을 옮김.
+#     HANOI(other_peg, start_peg, end_peg, cnt - 1)
+
+# # 횟수 출력
+# print(2**N-1)
+
 # if N <= 20:
+#     #H(n)
+#     #start_peg에서 end_peg으로 n개 원판을 옮기기.
 #     HANOI(1, 2, 3, N)
 
 
@@ -472,16 +529,16 @@
 #     j = N//2
 #     col[j] = d1[-j] = d2[j] = True
 #     backtracking(1)
-
 #     print(ans)
+
 # else:
 #     backtracking(0)
 #     print(ans*2)
 
 
 
-# #1074
-# #다시 보기
+#1074
+#다시 보기
 # N, r, c = map(int, input().split())
 
 # def sol(N, r, c):
@@ -492,7 +549,41 @@
 # 	return 2*(r%2)+(c%2) + 4*sol(N-1, int(r/2), int(c/2))
 
 # print(sol(N, r, c))
-    
+
+
+# #사분면 나눠서 하는 풀이
+# import sys
+
+# n, r, c = map(int, sys.stdin.readline().split())
+
+# visit = 0
+# while n != 0:
+#     n -= 1
+#     size = 2 ** n
+
+#     # 1사분면
+#     if r < size and c < size:
+#         visit += 0
+
+#     # 2사분면
+#     elif r < size and c >= size:
+#         visit += size * size
+#         c -= size
+
+#     # 3사분면
+#     elif r >= size and c < size:
+#         visit += size * size * 2
+#         r -= size
+
+#     # 4사분면
+#     else:
+#         visit += size * size * 3
+#         r -= size
+#         c -= size
+
+# print(visit)
+
+
 
 # #2750
 # tmp = []
@@ -514,8 +605,8 @@
 #     print(i)
 
 
-#10989
-#메모리 초과 풀이
+# # 10989
+# # 메모리 초과 풀이
 # import sys, heapq
 # input = sys.stdin.readline
 # print = sys.stdout.write
@@ -606,8 +697,9 @@
 # print(ans)
 
 
-# #10971
+#10971
 # #다시 보기
+# #백트래킹 사용 코드
 # import sys
 
 # N = int(input()) #도시의 개수
@@ -638,53 +730,37 @@
 # print(min_value)
 
 
+# #dfs이용 코드
+# #pypy로 풀림
+# import sys
+# input = sys.stdin.readline
+# n = int(input())
+# matrix = []
+# for _ in range(n):
+#     matrix.append([int(x) for x in input().split()])
+# # matrix = [list(map(int, input().split())) for _ in range(n)]
+# minCost = float('inf')
+# visited = [False for _ in range(n)]
+
+# def dfs(start, cur, cost):
+#     global matrix, visited, minCost
+
+#     if start == cur and visited.count(False) == 0:
+#         minCost = min(minCost, cost)
+
+#     for i in range(n):
+#         if matrix[cur][i] != 0 and visited[i] == 0:
+#             visited[i] = True
+#             dfs(start, i ,cost+matrix[cur][i])
+#             visited[i] = False
+
+
+# dfs(0,0,0)
+# print(minCost)
+
+
 
 # #14888
-# # # 순열 이용 - 시간초과/틀림
-# # from itertools import permutations
-# # N = int(input())
-# # A = list(map(int, input().split()))
-# # O = list(map(int, input().split()))
-
-# # tmp = []
-# # for i in range(4):
-# #     if O[i] != 0:
-# #         if i == 0:
-# #             for _ in range(O[i]):
-# #                 tmp.append("+") 
-# #         elif i == 1:
-# #             for _ in range(O[i]):
-# #                 tmp.append("-")
-# #         elif i == 2:
-# #             for _ in range(O[i]):
-# #                 tmp.append("*")
-# #         elif i == 3:
-# #             for _ in range(O[i]):
-# #                 tmp.append("//")
-
-# # # print(tmp)
-# # find_max = 0
-# # find_min = 123456789
-# # for arr in permutations(tmp, len(tmp)):
-# #     # print(arr)
-# #     res = A[0]
-# #     for j in range(0, len(A)-1):
-# #         if arr[j] == "+":
-# #             res += A[j+1]
-# #         elif arr[j] == "-":
-# #             res -= A[j+1]
-# #         elif arr[j] == "*":
-# #             res *= A[j+1]
-# #         elif arr[j] == "//":
-# #             res = int(res / A[j+1])
-# #         # print(res)
-# #     find_max = max(res, find_max)
-# #     find_min = min(res, find_min)
-
-# # print(find_max)
-# # print(find_min)
-
-
 # # 백트래킹 (Python3 통과, PyPy3도 통과)
 # import sys
 
@@ -717,5 +793,578 @@
 # dfs(1, num[0], op[0], op[1], op[2], op[3])
 # print(maximum)
 # print(minimum)
+
+
+
+
+#개인 Practice
+
+# #11729
+# N = int(input())
+# count = []
+
+# def hanoi(start_peg, other_peg, end_peg, N):
+
+#     global count
+
+#     if N == 0:
+#         return
+    
+#     hanoi(start_peg, end_peg, other_peg, N-1)
+#     count.append((start_peg, end_peg))
+#     hanoi(other_peg, start_peg, end_peg, N-1)
+
+
+# hanoi(1,2,3,N)
+# print(len(count))
+# for arr in count:
+#     print(' '.join(map(str, arr)))
+
+
+
+# #2447
+# #이전것이 주변을 둘러쌈
+# n = int(input())
+# star = ["***", "* *", "***"]
+# cnt = 0
+
+# def getStars(star):
+#     mat = []
+#     for i in range(3 * len(star)):
+#         if i // len(star) == 1:
+#             mat.append(star[i % len(star)] + " " * len(star) + star[i % len(star)])
+#         else:
+#             mat.append(star[i % len(star)] * 3)
+#     return mat
+
+
+# while n > 3:
+#     n /= 3
+#     cnt += 1
+
+# for i in range(cnt):
+#     star = getStars(star)
+
+# for i in star:
+#     print(i)
+
+
+# #1991
+# 안좋은 풀이...
+# N = int(input())
+# left = []
+# right = []
+# nodes = dict()
+# visited = set([])
+
+# for _ in range(N):
+#     a, b, c = map(str, input().split())
+#     nodes[a] = (b, c)
+
+# def pre(left, right):
+#     global visited
+
+#     #제일 왼쪽으로 끝까지 간다.
+#     if left != '.':
+#         print(left, end='')
+#         visited.add(left)
+#         pre(nodes[left][0], nodes[left][1])
     
     
+#     if len(visited) == N:
+#         return
+
+#     #오른쪽 노드가 있으면 본다.
+#     #본 다음에 올라간다.
+#     #오른쪽 노드가 있으면 본다.
+#     #본 다음에 올라간다.
+#     #...
+#     if right != '.':
+#         print(right, end='')
+#         pre(nodes[right][0], nodes[right][1])
+#     else:
+#         return
+
+
+# def ino(left, cur, right):
+#     global visited
+
+#     if len(visited) == N:
+#         return
+
+#     #끝까지 내려갔음
+#     if left == '.':
+    
+#         #말단이면 리턴
+#         if right == '.':
+#             print(cur, end='')
+#             visited.add(cur)
+#             return   
+
+#     else:
+#         # 아직 다 안내려갔으면 더 내려가기
+#         ino(nodes[left][0], left, nodes[left][1])
+    
+#     #right가 있으면
+#     if right != '.':
+#         print(cur, end='')
+#         visited.add(cur)
+#         ino(nodes[right][0], right, nodes[right][1])
+#     else:
+#         #right 없으면
+#         print(cur, end='')
+#         visited.add(cur)
+#         return
+
+
+# def post(left, cur, right):
+#     global visited
+
+#     if len(visited) == N:
+#         return
+
+#     #내려갔음
+#     if left == '.':
+#         #말단이면 리턴
+#         if right == '.':
+#             print(cur, end='')
+#             visited.add(cur)
+#             return
+#     else:
+#         # 아직 다 안내려갔으면 더 내려가기
+#         post(nodes[left][0], left, nodes[left][1])
+    
+#     #right가 없음
+#     if right == '.':
+#         print(cur, end='')
+#         visited.add(cur)
+#         #말단이면
+#         if left == '.':
+#             return
+
+#     else:
+#         #right 있으면
+#         post(nodes[right][0], right, nodes[right][1])
+#         print(cur, end='')
+#         visited.add(cur)
+
+# print('A', end='')
+# pre(nodes['A'][0], nodes['A'][1])
+# visited.clear()
+# print()
+# ino(nodes['A'][0], 'A', nodes['A'][1])
+# visited.clear()
+# print()
+# post(nodes['A'][0], 'A', nodes['A'][1])
+
+
+# # 좋은 풀이
+# import sys
+# input = sys.stdin.readline
+# N = int(input())
+# tree = {}
+# for _ in range(N):
+#     root, left, right = input().split()
+#     tree[root] = [left,right]
+
+# def preorder(root):
+#     if root != '.':
+#         print(root,end='')
+#         preorder(tree[root][0])
+#         preorder(tree[root][1])
+
+# def inorder(root):
+#     if root != '.':
+#         inorder(tree[root][0])
+#         print(root, end='')
+#         inorder(tree[root][1])
+
+# def postorder(root):
+#     if root != '.':
+#         postorder(tree[root][0])
+#         postorder(tree[root][1])
+#         print(root, end='')
+
+# preorder('A')
+# print()
+# inorder('A')
+# print()
+# postorder('A')
+
+
+
+#2747
+# #재귀함수1
+# #내 처음 코드.
+# #for 문을 재귀로 구현한듯? 통과는됨.
+# N = int(input())
+# ans = 0
+
+# def fibo(k, x, y):
+#     global ans
+#     if k == N:
+#         return ans
+    
+#     ans = x+y
+#     fibo(k+1, y, ans)
+
+# if N == 0 or N == 1:
+#     print(N)
+# else:
+#     fibo(1, 0, 1)
+#     print(ans)
+
+
+# #재귀함수2
+# #단순 재귀함수만 사용.
+# #근데 시간초과됨.
+# #pypy도 안됨.
+# n = int(input())
+
+# def fibo(n):
+#     if n <= 1:
+#         return n
+#     return fibo(n-1) + fibo(n-2)
+
+# print(fibo(n))
+
+
+# #동적프로그래밍 - 메모이제이션
+# n = int(input())
+# fibos = [0 for _ in range(n+1)]
+# # print(fibos)
+
+# def fibo(n):
+#     if n == 0 or n == 1:
+#         return n
+    
+#     if fibos[n] != 0:
+#         return fibos[n]
+
+#     fibos[n] = fibo(n-1) + fibo(n-2)
+#     return fibos[n]
+
+# print(fibo(n))
+
+
+# #for문만으로 구현
+# n = int(input())
+# fibos = [0 for _ in range(n+1)]
+
+# def fibo(n):
+#     fibos[1] = 1
+
+#     for i in range(2, n+1):
+#         fibos[i] = fibos[i-1] + fibos[i-2]
+
+#     return fibos[n]
+
+# if n == 0 or n == 1:
+#     print(n)
+# else:
+#     print(fibo(n))
+
+
+
+# #순열 구현하기
+# #dfs 와 체크리스트 : dfs트리
+# def DFS(L):
+#     #종료조건
+#     if L == r:
+#         print(result)
+#     else:
+#         for i in range(len(n)):
+#             if checklist[i] == 0:
+#                 result[L] = n[i]
+#                 checklist[i] = 1
+#                 DFS(L+1)
+#                 checklist[i] = 0
+
+
+# n = [1,2,3,4]
+# r = 3
+
+# result =[0]*r
+# checklist = [0]*len(n)
+
+# DFS(0)
+
+
+# #조합 구현하기
+# #dfs 와 체크리스트 : dfs트리
+# #트리를 트래버스 할때 "다음 시작점"을 가지고 간다.
+# def DFS(L, beginwith):
+#     #종료조건
+#     if L == r:
+#         print(result)
+#     else:
+#         for i in range(beginwith, len(n)):
+#             result[L] = n[i]
+#             DFS(L+1, i+1)
+
+
+# n = [1,2,3]
+# r=2
+
+# result=[0]*r
+
+#0 level, 0 beginwith
+# DFS(0, 0)
+
+
+
+# #1003
+# #동적프로그래밍 - 메모이제이션
+# def fibo_memo(x):
+#     if x == 0:
+#         memo[x] = [1, 0]
+#         return memo[x]
+#     elif x == 1:
+#         memo[x] = [0, 1]
+#         return memo[x]
+#     elif x in memo:
+#         return memo[x]
+#     else:
+#         a = fibo_memo(x-1)[0] + fibo_memo(x-2)[0]
+#         b = fibo_memo(x-1)[1] + fibo_memo(x-2)[1]
+#         memo[x] = [a,b]
+#         return memo[x]
+
+# import sys
+# input = sys.stdin.readline
+
+# for _ in range(int(input())):
+#     n = int(input())
+#     #딕셔너리 사용
+#     memo = {}
+#     print(' '.join(map(str, fibo_memo(n))))
+
+
+
+# # 9095
+# from itertools import product
+
+# nums = [1,2,3]
+# for _ in range(int(input())):
+#     N = int(input())
+#     count = 0
+#     for j in range(1, N+1):
+#         for i in product(nums ,repeat=j):
+#             if sum(i) == N:
+#                 count += 1
+#     print(count)
+
+
+# #1759
+# #4:01
+# #4:34
+# from itertools import combinations
+# L, C = map(int, input().split())
+# moeum = ["a", "e", "i", "o", "u"]
+# m = []
+# j = []
+# total = []
+# for alphabet in list(map(str, input().split())):
+#     if alphabet in moeum:
+#         m.append(alphabet)
+#     else:
+#         j.append(alphabet)
+
+# # i = 모음의 갯수
+# # L - i = 자음의 갯수
+# for i in range(1, len(m)+1):
+#     ans = ''
+#     if L-i < 2:
+#         break
+    
+#     for ary in combinations(m, i):
+#         for ary2 in combinations(j, L-i):
+#             total.append(sorted(ary+ary2))
+
+# for a in sorted(total):
+#     print(''.join(map(str, a)))
+
+
+# #2630
+# #쿼드트리 문제
+# import sys
+
+# N = int(sys.stdin.readline())
+# paper = [list(map(int, sys.stdin.readline().split())) for _ in range(N)] 
+
+# result = []
+
+# def solution(x, y, N) :
+#   color = paper[x][y]
+#   for i in range(x, x+N) :
+#     for j in range(y, y+N) :
+#       if color != paper[i][j] :
+#         solution(x, y, N//2)
+#         solution(x, y+N//2, N//2)
+#         solution(x+N//2, y, N//2)
+#         solution(x+N//2, y+N//2, N//2)
+#         return
+#   if color == 0 :
+#     result.append(0)
+#   else :
+#     result.append(1)
+
+
+# solution(0,0,N)
+# print(result.count(0))
+# print(result.count(1))
+
+
+
+# #1992
+# #5:32
+# #5:55
+# N = int(input())
+# ary = [list(map(str, input())) for _ in range(N)]
+
+# def solution(x, y, N):
+#     color = ary[x][y]
+#     for i in range(x, x+N):
+#         for j in range(y, y+N):
+#             if ary[i][j] != color:
+#                 print('(', end='')
+#                 solution(x, y, N//2)
+#                 solution(x, y+N//2, N//2)
+#                 solution(x+N//2, y, N//2)
+#                 solution(x+N//2, y+N//2, N//2)
+#                 print(')', end='')
+#                 return
+#     print(color, end='')
+
+# solution(0, 0, N)
+
+
+#1182
+#7:20
+#7:27
+# #조합 사용
+# from itertools import combinations
+
+# N, S = map(int, input().split())
+# ary = list(map(int, input().split()))
+# count = 0
+
+# for i in range(1, N+1):
+#     for sets in combinations(ary, i):
+#         if sum(sets) == S:
+#             count += 1
+
+# print(count)
+
+
+# #7:27
+# #답 참고함
+# import sys
+# input = sys.stdin.readline
+# def dfs(idx, sum):
+#     global cnt
+
+#     if idx >= n:
+#         return
+
+#     sum += ary[idx]
+
+#     if sum == s:
+#         cnt += 1
+
+#     dfs(idx + 1, sum - ary[idx])
+#     dfs(idx + 1, sum)
+
+# n, s = map(int, input().split())
+# ary = list(map(int, input().split()))
+# cnt = 0
+# dfs(0, 0)
+# print(cnt)
+
+
+# #1463
+# #7:44
+# #답보고 품
+# import sys
+# sys.setrecursionlimit(10**6)
+
+# N = int(input())
+# INF = 987654321
+# cache = [INF] * (N+1)
+# cache[1] = 0
+
+# def dp(x):
+#     if cache[x] != INF:
+#         return cache[x]
+
+#     if x % 6 == 0:
+#         cache[x] = min(dp(x//3), dp(x//2)) + 1
+#     elif x % 3 == 0:
+#         cache[x] = min(dp(x//3), dp(x-1)) + 1
+#     elif x % 2 == 0:
+#         cache[x] = min(dp(x//2), dp(x-1)) + 1
+#     else:
+#         cache[x] = dp(x-1) + 1 
+
+#     return cache[x]
+
+# print(dp(N))
+
+
+# #1543
+# #8:31
+# import sys
+# sys.setrecursionlimit(10 ** 6)
+# l = input()
+# a = input()
+
+# #k=검색한 횟수
+# def recur(k, idx):
+#     global count
+#     #종료 조건: k == len(l) or 뒤에 검색할 문자열이 a보다 짧음.
+#     #다 검색해봤을때
+#     if k == len(l) or len(l)-idx < len(a):
+#         return 
+        
+#     for i in range(0, len(a)):
+#         if a[i] != l[idx+i]:
+#             recur(k+i+1, idx+i+1)
+#             return
+    
+#     #단어 찾았을 때
+#     recur(k+len(a), idx+len(a))
+#     count += 1
+
+
+# tmp = []
+# for i in range(0, len(l)):
+#     count = 0
+#     recur(0, i)
+#     tmp.append(count)
+# print(max(tmp))
+
+
+#6603
+#조합 구현하기
+#dfs 와 체크리스트 : dfs트리
+#트리를 트래버스 할때 "다음 시작점"을 가지고 간다.
+def DFS(L, beginwith):
+    #종료조건
+    if L == r:
+        print(*sorted(result))
+    else:
+        for i in range(beginwith, len(n)):
+            result[L] = n[i]
+            DFS(L+1, i+1)
+
+while True:
+    n = list(map(int, input().split()))
+    if n[0] == 0:
+        break
+    n = n[1:]
+    r = 6
+    result=[0]*r
+
+    # 0 level, 0 beginwith
+    DFS(0, 0)
+    print()

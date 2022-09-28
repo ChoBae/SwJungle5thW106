@@ -1,5 +1,5 @@
-# 2309 일곱난쟁이 
-## 풀이 1
+# 2309 일곱난쟁이
+# 풀이 1
 from itertools import combinations
 
 dwarfs = [int(input()) for _ in range(9)]   # 9난쟁이 리스트
@@ -8,14 +8,14 @@ Comb = list(combinations(dwarfs, 7))    # 9명의 난쟁이의 조합(7명) 구�
 for com in Comb:
     # 해당 조합의 키의 합이 100이면 정답
     if sum(com) == 100:
-        res = list(com) # com이 튜플형식이기에 정렬을 위한 변환
+        res = list(com)  # com이 튜플형식이기에 정렬을 위한 변환
         res.sort()  # 오름차순 정렬
         for r in res:   # 출력
             print(r)
         break
-    
 
-## 풀이2
+
+# 풀이2
 # # 아홉난쟁이 키 리스트
 # ninedwarf = [int(input()) for i in range(9)]
 # # 아홉난쟁이의 키를 더한 값

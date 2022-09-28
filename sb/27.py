@@ -1,5 +1,7 @@
 # 카드 놓기 5568
 from itertools import permutations
+
+## 풀이1 순열풀이
 # 입력
 n = int(input())
 k = int(input())
@@ -22,4 +24,5 @@ for p in PerLi:
         res.append(tmp)
 # 출력
 print(len(res))
+    
     
