@@ -1216,24 +1216,155 @@
 
 
 
-#1992
-#5:32
-#5:55
-N = int(input())
-ary = [list(map(str, input())) for _ in range(N)]
+# #1992
+# #5:32
+# #5:55
+# N = int(input())
+# ary = [list(map(str, input())) for _ in range(N)]
 
-def solution(x, y, N):
-    color = ary[x][y]
-    for i in range(x, x+N):
-        for j in range(y, y+N):
-            if ary[i][j] != color:
-                print('(', end='')
-                solution(x, y, N//2)
-                solution(x, y+N//2, N//2)
-                solution(x+N//2, y, N//2)
-                solution(x+N//2, y+N//2, N//2)
-                print(')', end='')
-                return
-    print(color, end='')
+# def solution(x, y, N):
+#     color = ary[x][y]
+#     for i in range(x, x+N):
+#         for j in range(y, y+N):
+#             if ary[i][j] != color:
+#                 print('(', end='')
+#                 solution(x, y, N//2)
+#                 solution(x, y+N//2, N//2)
+#                 solution(x+N//2, y, N//2)
+#                 solution(x+N//2, y+N//2, N//2)
+#                 print(')', end='')
+#                 return
+#     print(color, end='')
 
-solution(0, 0, N)
+# solution(0, 0, N)
+
+
+#1182
+#7:20
+#7:27
+# #조합 사용
+# from itertools import combinations
+
+# N, S = map(int, input().split())
+# ary = list(map(int, input().split()))
+# count = 0
+
+# for i in range(1, N+1):
+#     for sets in combinations(ary, i):
+#         if sum(sets) == S:
+#             count += 1
+
+# print(count)
+
+
+# #7:27
+# #답 참고함
+# import sys
+# input = sys.stdin.readline
+# def dfs(idx, sum):
+#     global cnt
+
+#     if idx >= n:
+#         return
+
+#     sum += ary[idx]
+
+#     if sum == s:
+#         cnt += 1
+
+#     dfs(idx + 1, sum - ary[idx])
+#     dfs(idx + 1, sum)
+
+# n, s = map(int, input().split())
+# ary = list(map(int, input().split()))
+# cnt = 0
+# dfs(0, 0)
+# print(cnt)
+
+
+# #1463
+# #7:44
+# #답보고 품
+# import sys
+# sys.setrecursionlimit(10**6)
+
+# N = int(input())
+# INF = 987654321
+# cache = [INF] * (N+1)
+# cache[1] = 0
+
+# def dp(x):
+#     if cache[x] != INF:
+#         return cache[x]
+
+#     if x % 6 == 0:
+#         cache[x] = min(dp(x//3), dp(x//2)) + 1
+#     elif x % 3 == 0:
+#         cache[x] = min(dp(x//3), dp(x-1)) + 1
+#     elif x % 2 == 0:
+#         cache[x] = min(dp(x//2), dp(x-1)) + 1
+#     else:
+#         cache[x] = dp(x-1) + 1 
+
+#     return cache[x]
+
+# print(dp(N))
+
+
+# #1543
+# #8:31
+# import sys
+# sys.setrecursionlimit(10 ** 6)
+# l = input()
+# a = input()
+
+# #k=검색한 횟수
+# def recur(k, idx):
+#     global count
+#     #종료 조건: k == len(l) or 뒤에 검색할 문자열이 a보다 짧음.
+#     #다 검색해봤을때
+#     if k == len(l) or len(l)-idx < len(a):
+#         return 
+        
+#     for i in range(0, len(a)):
+#         if a[i] != l[idx+i]:
+#             recur(k+i+1, idx+i+1)
+#             return
+    
+#     #단어 찾았을 때
+#     recur(k+len(a), idx+len(a))
+#     count += 1
+
+
+# tmp = []
+# for i in range(0, len(l)):
+#     count = 0
+#     recur(0, i)
+#     tmp.append(count)
+# print(max(tmp))
+
+
+#6603
+#조합 구현하기
+#dfs 와 체크리스트 : dfs트리
+#트리를 트래버스 할때 "다음 시작점"을 가지고 간다.
+def DFS(L, beginwith):
+    #종료조건
+    if L == r:
+        print(*sorted(result))
+    else:
+        for i in range(beginwith, len(n)):
+            result[L] = n[i]
+            DFS(L+1, i+1)
+
+while True:
+    n = list(map(int, input().split()))
+    if n[0] == 0:
+        break
+    n = n[1:]
+    r = 6
+    result=[0]*r
+
+    # 0 level, 0 beginwith
+    DFS(0, 0)
+    print()
