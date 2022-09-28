@@ -849,113 +849,391 @@
 #     print(i)
 
 
-#1991
+# #1991
+# 안좋은 풀이...
+# N = int(input())
+# left = []
+# right = []
+# nodes = dict()
+# visited = set([])
+
+# for _ in range(N):
+#     a, b, c = map(str, input().split())
+#     nodes[a] = (b, c)
+
+# def pre(left, right):
+#     global visited
+
+#     #제일 왼쪽으로 끝까지 간다.
+#     if left != '.':
+#         print(left, end='')
+#         visited.add(left)
+#         pre(nodes[left][0], nodes[left][1])
+    
+    
+#     if len(visited) == N:
+#         return
+
+#     #오른쪽 노드가 있으면 본다.
+#     #본 다음에 올라간다.
+#     #오른쪽 노드가 있으면 본다.
+#     #본 다음에 올라간다.
+#     #...
+#     if right != '.':
+#         print(right, end='')
+#         pre(nodes[right][0], nodes[right][1])
+#     else:
+#         return
+
+
+# def ino(left, cur, right):
+#     global visited
+
+#     if len(visited) == N:
+#         return
+
+#     #끝까지 내려갔음
+#     if left == '.':
+    
+#         #말단이면 리턴
+#         if right == '.':
+#             print(cur, end='')
+#             visited.add(cur)
+#             return   
+
+#     else:
+#         # 아직 다 안내려갔으면 더 내려가기
+#         ino(nodes[left][0], left, nodes[left][1])
+    
+#     #right가 있으면
+#     if right != '.':
+#         print(cur, end='')
+#         visited.add(cur)
+#         ino(nodes[right][0], right, nodes[right][1])
+#     else:
+#         #right 없으면
+#         print(cur, end='')
+#         visited.add(cur)
+#         return
+
+
+# def post(left, cur, right):
+#     global visited
+
+#     if len(visited) == N:
+#         return
+
+#     #내려갔음
+#     if left == '.':
+#         #말단이면 리턴
+#         if right == '.':
+#             print(cur, end='')
+#             visited.add(cur)
+#             return
+#     else:
+#         # 아직 다 안내려갔으면 더 내려가기
+#         post(nodes[left][0], left, nodes[left][1])
+    
+#     #right가 없음
+#     if right == '.':
+#         print(cur, end='')
+#         visited.add(cur)
+#         #말단이면
+#         if left == '.':
+#             return
+
+#     else:
+#         #right 있으면
+#         post(nodes[right][0], right, nodes[right][1])
+#         print(cur, end='')
+#         visited.add(cur)
+
+# print('A', end='')
+# pre(nodes['A'][0], nodes['A'][1])
+# visited.clear()
+# print()
+# ino(nodes['A'][0], 'A', nodes['A'][1])
+# visited.clear()
+# print()
+# post(nodes['A'][0], 'A', nodes['A'][1])
+
+
+# # 좋은 풀이
+# import sys
+# input = sys.stdin.readline
+# N = int(input())
+# tree = {}
+# for _ in range(N):
+#     root, left, right = input().split()
+#     tree[root] = [left,right]
+
+# def preorder(root):
+#     if root != '.':
+#         print(root,end='')
+#         preorder(tree[root][0])
+#         preorder(tree[root][1])
+
+# def inorder(root):
+#     if root != '.':
+#         inorder(tree[root][0])
+#         print(root, end='')
+#         inorder(tree[root][1])
+
+# def postorder(root):
+#     if root != '.':
+#         postorder(tree[root][0])
+#         postorder(tree[root][1])
+#         print(root, end='')
+
+# preorder('A')
+# print()
+# inorder('A')
+# print()
+# postorder('A')
+
+
+
+#2747
+# #재귀함수1
+# #내 처음 코드.
+# #for 문을 재귀로 구현한듯? 통과는됨.
+# N = int(input())
+# ans = 0
+
+# def fibo(k, x, y):
+#     global ans
+#     if k == N:
+#         return ans
+    
+#     ans = x+y
+#     fibo(k+1, y, ans)
+
+# if N == 0 or N == 1:
+#     print(N)
+# else:
+#     fibo(1, 0, 1)
+#     print(ans)
+
+
+# #재귀함수2
+# #단순 재귀함수만 사용.
+# #근데 시간초과됨.
+# #pypy도 안됨.
+# n = int(input())
+
+# def fibo(n):
+#     if n <= 1:
+#         return n
+#     return fibo(n-1) + fibo(n-2)
+
+# print(fibo(n))
+
+
+# #동적프로그래밍 - 메모이제이션
+# n = int(input())
+# fibos = [0 for _ in range(n+1)]
+# # print(fibos)
+
+# def fibo(n):
+#     if n == 0 or n == 1:
+#         return n
+    
+#     if fibos[n] != 0:
+#         return fibos[n]
+
+#     fibos[n] = fibo(n-1) + fibo(n-2)
+#     return fibos[n]
+
+# print(fibo(n))
+
+
+# #for문만으로 구현
+# n = int(input())
+# fibos = [0 for _ in range(n+1)]
+
+# def fibo(n):
+#     fibos[1] = 1
+
+#     for i in range(2, n+1):
+#         fibos[i] = fibos[i-1] + fibos[i-2]
+
+#     return fibos[n]
+
+# if n == 0 or n == 1:
+#     print(n)
+# else:
+#     print(fibo(n))
+
+
+
+# #순열 구현하기
+# #dfs 와 체크리스트 : dfs트리
+# def DFS(L):
+#     #종료조건
+#     if L == r:
+#         print(result)
+#     else:
+#         for i in range(len(n)):
+#             if checklist[i] == 0:
+#                 result[L] = n[i]
+#                 checklist[i] = 1
+#                 DFS(L+1)
+#                 checklist[i] = 0
+
+
+# n = [1,2,3,4]
+# r = 3
+
+# result =[0]*r
+# checklist = [0]*len(n)
+
+# DFS(0)
+
+
+# #조합 구현하기
+# #dfs 와 체크리스트 : dfs트리
+# #트리를 트래버스 할때 "다음 시작점"을 가지고 간다.
+# def DFS(L, beginwith):
+#     #종료조건
+#     if L == r:
+#         print(result)
+#     else:
+#         for i in range(beginwith, len(n)):
+#             result[L] = n[i]
+#             DFS(L+1, i+1)
+
+
+# n = [1,2,3]
+# r=2
+
+# result=[0]*r
+
+#0 level, 0 beginwith
+# DFS(0, 0)
+
+
+
+# #1003
+# #동적프로그래밍 - 메모이제이션
+# def fibo_memo(x):
+#     if x == 0:
+#         memo[x] = [1, 0]
+#         return memo[x]
+#     elif x == 1:
+#         memo[x] = [0, 1]
+#         return memo[x]
+#     elif x in memo:
+#         return memo[x]
+#     else:
+#         a = fibo_memo(x-1)[0] + fibo_memo(x-2)[0]
+#         b = fibo_memo(x-1)[1] + fibo_memo(x-2)[1]
+#         memo[x] = [a,b]
+#         return memo[x]
+
+# import sys
+# input = sys.stdin.readline
+
+# for _ in range(int(input())):
+#     n = int(input())
+#     #딕셔너리 사용
+#     memo = {}
+#     print(' '.join(map(str, fibo_memo(n))))
+
+
+
+# # 9095
+# from itertools import product
+
+# nums = [1,2,3]
+# for _ in range(int(input())):
+#     N = int(input())
+#     count = 0
+#     for j in range(1, N+1):
+#         for i in product(nums ,repeat=j):
+#             if sum(i) == N:
+#                 count += 1
+#     print(count)
+
+
+# #1759
+# #4:01
+# #4:34
+# from itertools import combinations
+# L, C = map(int, input().split())
+# moeum = ["a", "e", "i", "o", "u"]
+# m = []
+# j = []
+# total = []
+# for alphabet in list(map(str, input().split())):
+#     if alphabet in moeum:
+#         m.append(alphabet)
+#     else:
+#         j.append(alphabet)
+
+# # i = 모음의 갯수
+# # L - i = 자음의 갯수
+# for i in range(1, len(m)+1):
+#     ans = ''
+#     if L-i < 2:
+#         break
+    
+#     for ary in combinations(m, i):
+#         for ary2 in combinations(j, L-i):
+#             total.append(sorted(ary+ary2))
+
+# for a in sorted(total):
+#     print(''.join(map(str, a)))
+
+
+# #2630
+# #쿼드트리 문제
+# import sys
+
+# N = int(sys.stdin.readline())
+# paper = [list(map(int, sys.stdin.readline().split())) for _ in range(N)] 
+
+# result = []
+
+# def solution(x, y, N) :
+#   color = paper[x][y]
+#   for i in range(x, x+N) :
+#     for j in range(y, y+N) :
+#       if color != paper[i][j] :
+#         solution(x, y, N//2)
+#         solution(x, y+N//2, N//2)
+#         solution(x+N//2, y, N//2)
+#         solution(x+N//2, y+N//2, N//2)
+#         return
+#   if color == 0 :
+#     result.append(0)
+#   else :
+#     result.append(1)
+
+
+# solution(0,0,N)
+# print(result.count(0))
+# print(result.count(1))
+
+
+
+#1992
+#5:32
+#5:55
 N = int(input())
-left = []
-right = []
-nodes = dict()
-visited = set([])
+ary = [list(map(str, input())) for _ in range(N)]
 
-for _ in range(N):
-    a, b, c = map(str, input().split())
-    nodes[a] = (b, c)
+def solution(x, y, N):
+    color = ary[x][y]
+    for i in range(x, x+N):
+        for j in range(y, y+N):
+            if ary[i][j] != color:
+                print('(', end='')
+                solution(x, y, N//2)
+                solution(x, y+N//2, N//2)
+                solution(x+N//2, y, N//2)
+                solution(x+N//2, y+N//2, N//2)
+                print(')', end='')
+                return
+    print(color, end='')
 
-
-def pre(left, right):
-    global visited
-
-    #제일 왼쪽으로 끝까지 간다.
-    if left != '.':
-        print(left, end='')
-        visited.add(left)
-        pre(nodes[left][0], nodes[left][1])
-    
-    
-    if len(visited) == N:
-        return
-
-    #오른쪽 노드가 있으면 본다.
-    #본 다음에 올라간다.
-    #오른쪽 노드가 있으면 본다.
-    #본 다음에 올라간다.
-    #...
-    if right != '.':
-        print(right, end='')
-        pre(nodes[right][0], nodes[right][1])
-    else:
-        return
-
-
-def ino(left, cur, right):
-    global visited
-
-    if len(visited) == N:
-        return
-
-    #끝까지 내려갔음
-    if left == '.':
-    
-        #말단이면 리턴
-        if right == '.':
-            print(cur, end='')
-            visited.add(cur)
-            return   
-
-    else:
-        # 아직 다 안내려갔으면 더 내려가기
-        ino(nodes[left][0], left, nodes[left][1])
-    
-    #right가 있으면
-    if right != '.':
-        print(cur, end='')
-        visited.add(cur)
-        ino(nodes[right][0], right, nodes[right][1])
-    else:
-        #right 없으면
-        print(cur, end='')
-        visited.add(cur)
-        return
-
-
-def post(left, cur, right):
-    global visited
-
-    if len(visited) == N:
-        return
-
-    #내려갔음
-    if left == '.':
-        #말단이면 리턴
-        if right == '.':
-            print(cur, end='')
-            visited.add(cur)
-            return
-    else:
-        # 아직 다 안내려갔으면 더 내려가기
-        post(nodes[left][0], left, nodes[left][1])
-    
-    #right가 없음
-    if right == '.':
-        print(cur, end='')
-        visited.add(cur)
-        #말단이면
-        if left == '.':
-            return
-
-    else:
-        #right 있으면
-        post(nodes[right][0], right, nodes[right][1])
-        print(cur, end='')
-        visited.add(cur)
-
-
-
-    
-print('A', end='')
-pre(nodes['A'][0], nodes['A'][1])
-visited.clear()
-print()
-ino(nodes['A'][0], 'A', nodes['A'][1])
-visited.clear()
-print()
-post(nodes['A'][0], 'A', nodes['A'][1])
+solution(0, 0, N)
