@@ -796,8 +796,9 @@
 
 
 
-
-#개인 Practice
+#################
+##개인 Practice##
+#################
 
 # #11729
 # N = int(input())
@@ -1344,27 +1345,27 @@
 # print(max(tmp))
 
 
-#6603
-#조합 구현하기
-#dfs 와 체크리스트 : dfs트리
-#트리를 트래버스 할때 "다음 시작점"을 가지고 간다.
-def DFS(L, beginwith):
-    #종료조건
-    if L == r:
-        print(*sorted(result))
-    else:
-        for i in range(beginwith, len(n)):
-            result[L] = n[i]
-            DFS(L+1, i+1)
+# #6603
+# #조합 구현하기
+# #dfs 와 체크리스트 : dfs트리
+# #트리를 트래버스 할때 "다음 시작점"을 가지고 간다.
+# def DFS(L, beginwith):
+#     #종료조건
+#     if L == r:
+#         print(*sorted(result))
+#     else:
+#         for i in range(beginwith, len(n)):
+#             result[L] = n[i]
+#             DFS(L+1, i+1)
 
-while True:
-    n = list(map(int, input().split()))
-    if n[0] == 0:
-        break
-    n = n[1:]
-    r = 6
-    result=[0]*r
+# while True:
+#     n = list(map(int, input().split()))
+#     if n[0] == 0:
+#         break
+#     n = n[1:]
+#     r = 6
+#     result=[0]*r
 
-    # 0 level, 0 beginwith
-    DFS(0, 0)
-    print()
+#     # 0 level, 0 beginwith
+#     DFS(0, 0)
+#     print()
